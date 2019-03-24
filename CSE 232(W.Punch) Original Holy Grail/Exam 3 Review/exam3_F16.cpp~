@@ -1,0 +1,48 @@
+#include<iostream>
+using std::cout; using std::endl;
+
+long f1(long* l, long n){
+  long t = *l;
+  *l = *l + n;
+  return t;
+}
+
+long f2 (long* l, size_t s, long t){
+  long result=0;
+  for(int i=0; i<s; i++){
+    *l = *l + t;
+    result += *l;
+    l = l + 1;
+  }
+  return result;
+}
+
+long f3 (long* l, size_t s){
+  long t = *l;
+  for(int i=0; i<(s-1); i++){
+    *l = *(l+1);
+    l = l + 1;
+    cout<<"L  is now"<<" "<<*l<<endl;
+     cout<<"i is now"<<" "<<i<<endl;
+  }
+
+  *l = t;
+
+  return t;
+}
+  
+int main (){
+//  long l1 = 25;
+//  cout << f1(&l1, 10) << endl;  // Line 1
+//  cout << l1 << endl;           // Line 2
+//  
+//  long l2[4] = {2,3,4,5};
+//  cout << f2(l2,4,2) << endl;   // Line 3
+//  cout << l2[0] << endl;        // Line 4
+//  cout << l2[3] << endl;        // Line 5
+
+  long l3[5] = {1,2,3,4,5};
+  cout << f3(l3,5) << endl;     // Line 6
+  cout << l3[0] << endl;        // Line 7
+  cout << l3[4] << endl;        // Line 8
+}

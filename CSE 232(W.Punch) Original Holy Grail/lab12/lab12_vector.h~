@@ -1,0 +1,77 @@
+#ifndef VECTOR_H
+#define VECTOR_H
+
+#include<algorithm>
+#include<string>
+using std::string;
+#include<iostream>
+using std::ostream;
+#include<initializer_list>
+using std::initializer_list;
+
+
+
+
+namespace student {
+template<typename T>
+	class vector{
+ 		private:
+	 	T* data_ = nullptr; // An arry that points to the beginining of an element type "T" block of memory. 
+	 	size_t capacity_ = 10;
+		size_t size_ = 0;
+	 
+ 		// Note we are able to put the constructor inside the class decleration.
+		public:
+		vector()= default;{//default constructor 
+ 	 	vector(size_t c){//param constructor
+		capacity_ = c;
+	        size_ =0;
+		data_ = new T[capacity_]{};// We must ask the O.S for memory to be allocated dynamically onto the arry data_ since we don't know how much we need at runtime.
+		}
+
+  		vector(initializer_list<T> initial){// Constructor
+	        capacity_  = initial.size();
+		size_ = initial.size();
+	        data_ = new T[initial.size()]{};// Allocate memory from O.S to ary data 
+		std::copy(initial.begin(), initial.end(), data_);// Copy contents from intializer list to the ary data_
+		}
+
+
+//		// Method declerations 
+//		size_t capacity(); //Should return the capacity of our vector
+//  		size_t size_();// Should return the size of our vector 
+
+		size_t capacity(){
+		return capacity_;
+		}
+
+		size_t size(){
+		return size_;
+		}
+
+		void push_back(T val){
+			cout<<"did we make it here"<<endl;
+			if(size_ >= capacity_){
+				auto new_data = new T[capacity_*2]; // Create new array, twice the size
+  				std::copy(data_, data_+size_ ,new_data);  // Copy old into new
+				std::swap(data_, new_data);
+				delete [] new_data;  // delete old array
+				size_++;
+				data_[size_-1]=val;
+				capacity_ = capacity_ *2;
+				
+			
+			}
+			else if(size_ < capacity_)
+			cout<<"how about here?"<<endl;
+			{
+			data_ [size_] = val;
+			size_++;
+			}
+		}	
+	}; // Class definitions end with semi col after brace. Constructors declerations do not
+
+
+}
+
+#endif
